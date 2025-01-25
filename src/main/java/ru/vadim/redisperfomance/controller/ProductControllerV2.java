@@ -4,17 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import ru.vadim.redisperfomance.entity.Product;
-import ru.vadim.redisperfomance.service.ProductServiceV1;
+import ru.vadim.redisperfomance.service.ProductServiceV2;
 
-
-// jmeter для старта из терминала jmeter -n -t <script name with path> -l <log file name with path>
-// заполненный пример jmeter -n -t redis-cource/product-service.jmx -l redis-cource/v1.jtl
 @RestController
-@RequestMapping("product/v1")
-public class ProductControllerV1 {
-
+@RequestMapping("product/v2")
+public class ProductControllerV2 {
     @Autowired
-    private ProductServiceV1 productService;
+    private ProductServiceV2 productService;
 
     @GetMapping("{id}")
     public Mono<Product> getProduct(@PathVariable int id) {
@@ -24,5 +20,10 @@ public class ProductControllerV1 {
     @PutMapping("{id}")
     public Mono<Product> updateProduct(@PathVariable int id, @RequestBody Mono<Product> productMono) {
         return this.productService.updateProduct(id, productMono);
+    }
+
+    @DeleteMapping("{id}")
+    public Mono<Void> deleteProduct(@PathVariable int id) {
+        return this.productService.deleteProduct(id);
     }
 }
