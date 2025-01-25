@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 import ru.vadim.redisperfomance.entity.Product;
 import ru.vadim.redisperfomance.repository.ProductRepository;
 
-@Service
+//@Service
 public class ProductCacheTemplate extends CacheTemplate<Integer, Product> {
 
     @Autowired
