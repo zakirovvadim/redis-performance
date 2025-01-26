@@ -14,8 +14,9 @@ import ru.vadim.redisperfomance.entity.Product;
 import ru.vadim.redisperfomance.repository.ProductRepository;
 
 import java.util.function.Function;
-
-@Service
+/*
+Мой вариант подсчеа полпулярности продукта, в гет метод просто добавил пуш в сортедСет
+ */
 public class ProductVisitTemplate extends CacheTemplate<Integer, Product> {
     @Autowired
     private ProductRepository productRepository;
@@ -39,14 +40,14 @@ public class ProductVisitTemplate extends CacheTemplate<Integer, Product> {
 
     }
 
-    @Override
-    public Flux<Product> getTopThree() {
-        return this.sortedSet.entryRangeReversed(0 , 3)
-                .flatMapIterable(Function.identity())
-                .map(ScoredEntry::getValue)
-                .concatMap(map::get)
-                .doOnNext(System.out::println);
-    }
+//    @Override
+//    public Flux<Product> getTopThree() {
+//        return this.sortedSet.entryRangeReversed(0 , 3)
+//                .flatMapIterable(Function.identity())
+//                .map(ScoredEntry::getValue)
+//                .concatMap(map::get)
+//                .doOnNext(System.out::println);
+//    }
 
     @Override
     protected Mono<Product> updateSource(Integer id, Product product) {

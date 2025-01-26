@@ -2,32 +2,27 @@ package ru.vadim.redisperfomance.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.vadim.redisperfomance.entity.Product;
 import ru.vadim.redisperfomance.service.ProductServiceV2;
-import ru.vadim.redisperfomance.service.ProductVisitService;
-import ru.vadim.redisperfomance.service.util.ProductVisitTemplate;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("product/v2")
 public class ProductControllerV2 {
     @Autowired
     private ProductServiceV2 productService;
-    @Autowired
-    private ProductVisitService productVisitService;
+//    @Autowired
+//    private ProductVisitService productVisitService;
 
     @GetMapping("{id}")
     public Mono<Product> getProduct(@PathVariable int id) {
         return this.productService.getProduct(id);
     }
 
-    @GetMapping("top")
-    public Mono<List<Product>> getTopThree() {
-        return productVisitService.getTopThreeProducts();
-    }
+//    @GetMapping("top")
+//    public Mono<List<Product>> getTopThree() {
+//        return productVisitService.getTopThreeProducts();
+//    }
 
     @PutMapping("{id}")
     public Mono<Product> updateProduct(@PathVariable int id, @RequestBody Mono<Product> productMono) {
