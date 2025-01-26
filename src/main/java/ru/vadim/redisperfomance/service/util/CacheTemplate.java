@@ -1,5 +1,6 @@
 package ru.vadim.redisperfomance.service.util;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 /*
 абстрактный класс для работы с кешом, чтобы не писать постоянно один и тот же функционал
@@ -26,6 +27,7 @@ public abstract class CacheTemplate<KEY, ENTITY> {
 
     abstract protected Mono<ENTITY> getFromSource(KEY key);
     abstract protected Mono<ENTITY> getFromCache(KEY key);
+    public abstract Flux<ENTITY> getTopThree();
     abstract protected Mono<ENTITY> updateSource(KEY key, ENTITY entity);
     abstract protected Mono<ENTITY> updateCache(KEY key, ENTITY entity);
     abstract protected Mono<Void> deleteFromSource(KEY key);
